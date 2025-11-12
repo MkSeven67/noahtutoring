@@ -3222,18 +3222,18 @@
             // Enable or disable the announcement bar at the top of the page.
             announcement: {
                 enabled: true,
-                title: "Update",
-                body: "Chat is now live! The default theme is changed (It was orange/black) 💀",
+                title: "Announcement",
+                body: "Chat is now live! The default theme is changed (It was orange/black) 💀 | Im going to change password in: ",
                 
                 // --- COUNTDOWN TIMER ---
                 // Shows a countdown timer in the announcement bar.
                 timer: {
-                    enabled: false,
+                    enabled: true,
                     // Set your target date and time here (YYYY, MM-1, DD, HH, MM, SS)
                     // Example: Christmas 2025 -> new Date(2025, 11, 25, 0, 0, 0)
                     // Note: Months are 0-indexed (Jan=0, Dec=11)
                     // This example is set for Jan 1, 2026
-                    targetTimestamp: new Date(2026, 0, 1, 0, 0, 0).getTime() 
+                    targetTimestamp: new Date(2025, 11, 14, 0, 0, 0).getTime() 
                 }
             },
             
@@ -3531,7 +3531,7 @@
         
         /* --- NEW CHAT CLIENT-SIDE JAVASCRIPT (using native WebSocket) --- */
         
-        const socketURL = 'wss://wssserver.onrender.com';
+        const socketURL = 'wss://backend-katyisd.zone.id';
         let socket;
 
         window.username = null; // Store username globally
