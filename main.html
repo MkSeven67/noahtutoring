@@ -40,13 +40,103 @@
             z-index: -1;
             opacity: .3
         }
+        
+        /* --- NEW ANNOUNCEMENT BAR STYLES --- */
+        #announcement-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(10, 10, 10, 0.95);
+            border-bottom: 2px solid var(--primary-orange);
+            z-index: 1001; /* High z-index, but below game page (1000) and modals (2000) */
+            padding: 12px 20px;
+            display: none; /* Hidden by default, shown by JS */
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 4px 20px rgba(var(--primary-orange-rgb), 0.3);
+        }
+
+        #announcement-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        #announcement-title {
+            color: var(--primary-orange);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 5px var(--primary-orange);
+        }
+
+        #announcement-body {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        #announcement-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #announcement-timer {
+            background-color: rgba(var(--primary-orange-rgb), 0.1);
+            border: 1px solid var(--primary-orange);
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--light-text);
+            text-shadow: 0 0 3px var(--primary-orange);
+            display: none; /* Hidden by default */
+        }
+
+        #announcement-close {
+            background: transparent;
+            border: none;
+            color: var(--gray-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #announcement-close:hover {
+            color: var(--primary-orange);
+            transform: scale(1.1);
+        }
+        
+        /* Adjust main container padding if announcement bar is visible */
+        body.announcement-visible .container {
+            padding-top: 80px; /* Adjust as needed based on announcement bar height */
+        }
+        
+        @media (max-width: 768px) {
+             body.announcement-visible .container {
+                padding-top: 120px; /* More space on mobile if it wraps */
+             }
+             #announcement-bar {
+                justify-content: center;
+                text-align: center;
+             }
+             #announcement-controls {
+                justify-content: center;
+                width: 100%;
+             }
+        }
+        /* --- END ANNOUNCEMENT BAR STYLES --- */
+
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
             transform: translateY(0);
-            transition: transform .5s ease-in-out
+            transition: transform .5s ease-in-out, padding-top 0.3s ease; /* Added padding-top transition */
         }
 
         .container.slide-down {
@@ -184,6 +274,18 @@
             content: ']';
             margin-left: 10px;
             margin-right: 0;
+        }
+        
+        /* Message for disabled sections */
+        .disabled-message-static {
+            text-align: center;
+            color: var(--gray-text);
+            font-size: 1.2rem;
+            margin: 40px 0;
+            padding: 30px;
+            background: rgba(10, 10, 10, .5);
+            border-radius: 8px;
+            border: 1px solid rgba(var(--primary-orange-rgb), .3);
         }
 
         .lessons-grid {
@@ -559,6 +661,12 @@
         .partners-section, .chat-section { /* Added chat-section */
             display: none;
         }
+        
+        /* New section for disabled games message */
+        #games-disabled-section {
+            display: none; /* Hidden by default */
+        }
+
 
         .partners-grid {
             display: grid;
@@ -915,7 +1023,9 @@
         .theme-rainbow #username-input, /* Added */
         .theme-rainbow #chat-container, /* Added */
         .theme-rainbow #chat-form, /* Added */
-        .theme-rainbow #chat-submit /* Added */
+        .theme-rainbow #chat-submit, /* Added */
+        .theme-rainbow #announcement-bar, /* Added */
+        .theme-rainbow #announcement-timer /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -969,7 +1079,9 @@
         .theme-cyber-green #username-input, /* Added */
         .theme-cyber-green #chat-container, /* Added */
         .theme-cyber-green #chat-form, /* Added */
-        .theme-cyber-green #chat-submit /* Added */
+        .theme-cyber-green #chat-submit, /* Added */
+        .theme-cyber-green #announcement-bar, /* Added */
+        .theme-cyber-green #announcement-timer /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1023,7 +1135,9 @@
         .theme-ice-blue #username-input, /* Added */
         .theme-ice-blue #chat-container, /* Added */
         .theme-ice-blue #chat-form, /* Added */
-        .theme-ice-blue #chat-submit /* Added */
+        .theme-ice-blue #chat-submit, /* Added */
+        .theme-ice-blue #announcement-bar, /* Added */
+        .theme-ice-blue #announcement-timer /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1077,7 +1191,9 @@
         .theme-solarized #username-input, /* Added */
         .theme-solarized #chat-container, /* Added */
         .theme-solarized #chat-form, /* Added */
-        .theme-solarized #chat-submit /* Added */
+        .theme-solarized #chat-submit, /* Added */
+        .theme-solarized #announcement-bar, /* Added */
+        .theme-solarized #announcement-timer /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1131,7 +1247,9 @@
         .theme-purple-haze #username-input, /* Added */
         .theme-purple-haze #chat-container, /* Added */
         .theme-purple-haze #chat-form, /* Added */
-        .theme-purple-haze #chat-submit /* Added */
+        .theme-purple-haze #chat-submit, /* Added */
+        .theme-purple-haze #announcement-bar, /* Added */
+        .theme-purple-haze #announcement-timer /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1161,6 +1279,45 @@
             --gray-text: #888;
             --accent-orange: #e69500;
         }
+        
+        .theme-amber header,
+        .theme-amber footer,
+        .theme-amber .terminal-prompt,
+        .theme-amber section,
+        .theme-amber .lesson-card,
+        .theme-amber .search-box,
+        .theme-amber .game-header,
+        .theme-amber .game-frame,
+        .theme-amber .comments-section,
+        .theme-amber .partner-card,
+        .theme-amber #username-form,
+        .theme-amber #username-input,
+        .theme-amber #chat-container,
+        .theme-amber #chat-form,
+        .theme-amber #chat-submit,
+        .theme-amber #announcement-bar,
+        .theme-amber #announcement-timer
+        {
+            border-color: var(--primary-orange) !important;
+        }
+        
+        .theme-amber .lesson-card:hover,
+        .theme-amber .launch-command,
+        .theme-amber .btn:hover,
+        .theme-amber .fullscreen-btn:hover,
+        .theme-amber .search-box:focus,
+        .theme-amber .partner-card:hover,
+        .theme-amber .visit-btn:hover,
+        .theme-amber .nav-tab:hover,
+        .theme-amber .nav-tab.active,
+        .theme-amber #username-input:focus,
+        .theme-amber #username-submit:hover,
+        .theme-amber #chat-submit:hover
+        {
+            box-shadow: 0 0 15px var(--primary-orange) !important;
+            border-color: var(--accent-orange) !important;
+        }
+
 
         @media (max-width:768px) {
             .lessons-grid {
@@ -1216,6 +1373,18 @@
 <body>
     <canvas id="matrix-bg"></canvas>
 
+    <!-- NEW ANNOUNCEMENT BAR -->
+    <div id="announcement-bar">
+        <div id="announcement-content">
+            <div id="announcement-title"></div>
+            <div id="announcement-body"></div>
+        </div>
+        <div id="announcement-controls">
+            <div id="announcement-timer"></div>
+            <button id="announcement-close" title="Close Announcement">&times;</button>
+        </div>
+    </div>
+
     <!-- Username Modal -->
     <div id="username-modal">
         <form id="username-form">
@@ -1265,6 +1434,32 @@
 
         <!-- Lessons Section (Visible by default) -->
         <section id="lessons-section">
+            <h2>POPULAR</h2>
+            <div class="lessons-grid">
+                <!-- Popular lesson cards... -->
+                <div class="lesson-card" onclick="openLesson('Plants Vs Zombies 2', 'https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html')">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg" alt="Plants Vs Zombies 2" class="lesson-image">
+                    <h3 class="lesson-title">Plants Vs Zombies 2</h3>
+                    <p class="lesson-desc">Defend your lawn with crazy plants against fun-loving zombies across time</p>
+                    <span class="launch-command">[LAUNCH: PVZ_2]</span>
+                </div>
+                <div class="lesson-card" onclick="openLesson('Hotline Miami', 'https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html')">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg" alt="Hotline Miami" class="lesson-image">
+                    <h3 class="lesson-title">Hotline Miami</h3>
+                    <p class="lesson-desc">Fast-paced top-down action combat</p>
+                    <span class="launch-command">[LAUNCH: HOTLINE_MIAMI]</span>
+                </div>
+                <div class="lesson-card" onclick="openLesson('Balatro', 'https://thirstygithub.github.io/cool-math/')">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg" alt="Balatro" class="lesson-image">
+                    <h3 class="lesson-title">Balatro</h3>
+                    <p class="lesson-desc">Build insane poker hands with special Joker cards</p>
+                    <span class="launch-command">[LAUNCH: BALATRO]</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Lessons Section (Visible by default) -->
+         <section id="lessons-section">
             <h2>POPULAR</h2>
             <div class="lessons-grid">
                 <!-- Popular lesson cards... -->
@@ -2909,12 +3104,17 @@
                     </div>
             </div>
         </section>
+        
+        <!-- NEW Games Disabled Section -->
+        <section id="games-disabled-section">
+            <h2>GAMES</h2>
+            <p class="disabled-message-static">Games are currently disabled by the administrator.</p>
+        </section>
+        
 
-        <!-- Partners Section (Hidden by default) -->
         <section id="partners-section" class="partners-section">
             <h2>PARTNERS</h2>
             <div class="partners-grid">
-                <!-- Partner cards... -->
                 <div class="partner-card">
                     <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/1.jpg" alt="Partner Logo" class="partner-image">
                     <h3 class="partner-title">Bloxcraft UBG</h3>
@@ -2937,7 +3137,38 @@
                         <button class="visit-btn" onclick="window.open('https://glacierarcade.xyz/', '_blank')">VISIT SITE</button>
                     </div>
                 </div>
-                <!-- ... Other partner cards ... -->
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/3.jpg" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">Rosin</h3>
+                    <p class="partner-desc">Rosin, your one-stop for 567+ unblocked games with clean UI, accounts, and BYOD. All this and much more. Made with ❤️ for gamers everywhere.</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/xzwUY9R8Tp', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://afcyqmpzsb.itafricagroup.com/', '_blank')">VISIT SITE</button>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/4.png" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">GN-Math</h3>
+                    <p class="partner-desc">Most popular game/proxy sites use my games!! (doge unblocker, frogies arcade, truffled, petezah and more)</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/gn-math', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://gn-math.dev/', '_blank')">VISIT SITE</button>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/6.jpg" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">Truffled</h3>
+                    <p class="partner-desc">Join us so we can grow and hopefully be one of the biggest unblocked game sites ❤️</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/truffled', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://truffled.lol/', '_blank')">VISIT SITE</button>
+                    </div>
             </div>
         </section>
         
@@ -2987,6 +3218,45 @@
 
     <!-- Main Website & Game JavaScript -->
     <script>
+        
+        // ==================================================================
+        // =================== SITE CONFIGURATION ===========================
+        // ==================================================================
+        // == Edit all settings here ==
+        
+        const siteConfig = {
+            
+            // --- ANNOUNCEMENT ---
+            // Enable or disable the announcement bar at the top of the page.
+            announcement: {
+                enabled: true,
+                title: "Update",
+                body: "Chat is now live! The default theme is changed (It was orange/black) 💀",
+                
+                // --- COUNTDOWN TIMER ---
+                // Shows a countdown timer in the announcement bar.
+                timer: {
+                    enabled: false,
+                    // Set your target date and time here (YYYY, MM-1, DD, HH, MM, SS)
+                    // Example: Christmas 2025 -> new Date(2025, 11, 25, 0, 0, 0)
+                    // Note: Months are 0-indexed (Jan=0, Dec=11)
+                    // This example is set for Jan 1, 2026
+                    targetTimestamp: new Date(2026, 0, 1, 0, 0, 0).getTime() 
+                }
+            },
+            
+            // --- FEATURE TOGGLES ---
+            // Enable or disable entire sections of the site.
+            
+            gamesEnabled: true, // Set to false to disable all games
+            chatEnabled: true     // Set to false to disable the chat tab and section
+        };
+        
+        // ==================================================================
+        // =================== END OF CONFIGURATION =========================
+        // ==================================================================
+
+
         const canvas = document.getElementById('matrix-bg');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -3031,6 +3301,15 @@
         }
 
         function openLesson(title, url) {
+            // Check config before opening a lesson
+            if (!siteConfig.gamesEnabled) {
+                // We don't need to do anything here because the
+                // lesson cards are hidden and the disabled message is shown.
+                // This is just an extra safeguard.
+                console.warn("Games are disabled, cannot open lesson.");
+                return;
+            }
+            
             document.getElementById('gameTitle').textContent = title;
             document.getElementById('gameFrame').src = url;
             document.getElementById('gamePage').classList.add('active');
@@ -3059,7 +3338,8 @@
                 initiateDownload(gameUrl, gameTitle);
             } else {
                 trackEvent('game_interaction', 'download_failed', gameTitle, 1);
-                alert('Sorry, this game is not downloadable. Try another one.');
+                // Simple non-blocking message instead of alert
+                console.error('Sorry, this game is not downloadable.');
             }
         }
 
@@ -3122,7 +3402,8 @@
             } catch (error) {
                 console.error('Download error:', error);
                 trackEvent('game_interaction', 'download_error', gameTitle, 1);
-                alert('Unable to download game. Please try again later.');
+                // Simple non-blocking message instead of alert
+                console.error('Unable to download game. Please try again later.');
             }
         }
 
@@ -3201,54 +3482,32 @@
             }
         });
 
-        // ... (rest of your fullscreen logic) ...
-
-        // Search logic
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const lessonCards = document.querySelectorAll('#allLessonsGrid .lesson-card');
-            let visibleCount = 0;
-            lessonCards.forEach(card => {
-                const title = card.querySelector('.lesson-title').textContent.toLowerCase();
-                const desc = card.querySelector('.lesson-desc').textContent.toLowerCase();
-                if (title.includes(searchTerm) || desc.includes(searchTerm)) {
-                    card.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            const searchStats = document.getElementById('searchStats');
-            if (searchTerm.length > 0) {
-                searchStats.textContent = `Found ${visibleCount} lesson${visibleCount !== 1 ? 's' : ''} matching "${searchTerm}"`;
-            } else {
-                searchStats.textContent = '';
-            }
-        });
-
         // Tab switching logic
         function switchTab(tabName) {
             document.getElementById('lessonsTab').classList.toggle('active', tabName === 'lessons');
             document.getElementById('partnersTab').classList.toggle('active', tabName === 'partners');
-            document.getElementById('chatTab').classList.toggle('active', tabName === 'chat'); // New chat tab
+            document.getElementById('chatTab').classList.toggle('active', tabName === 'chat');
 
-            document.getElementById('lessons-section').style.display = tabName === 'lessons' ? 'block' : 'none';
-            document.getElementById('all-lessons').style.display = tabName === 'lessons' ? 'block' : 'none';
+            // Show/hide based on config
+            document.getElementById('lessons-section').style.display = tabName === 'lessons' && siteConfig.gamesEnabled ? 'block' : 'none';
+            document.getElementById('all-lessons').style.display = tabName === 'lessons' && siteConfig.gamesEnabled ? 'block' : 'none';
+            document.getElementById('games-disabled-section').style.display = tabName === 'lessons' && !siteConfig.gamesEnabled ? 'block' : 'none';
+            
             document.getElementById('partners-section').style.display = tabName === 'partners' ? 'block' : 'none';
             
-            // Show/hide chat section
+            // Show/hide chat section (config is checked in initializeSiteFeatures)
             const chatSection = document.getElementById('chat-section');
             chatSection.style.display = tabName === 'chat' ? 'block' : 'none';
             
             // If user clicks chat tab and hasn't entered a name, show the modal
-            if(tabName === 'chat' && !window.username) {
+            if(tabName === 'chat' && !window.username && siteConfig.chatEnabled) {
                 document.getElementById('username-modal').style.display = 'flex';
             }
         }
 
         // Theme cycling logic
         const themes = ['theme-amber', 'theme-rainbow', 'theme-cyber-green', 'theme-ice-blue', 'theme-solarized', 'theme-purple-haze'];
-        let currentThemeIndex = 0;
+        let currentThemeIndex = 3; // Start with Ice Blue
 
         function cycleTheme() {
             document.body.classList.remove(themes[currentThemeIndex]);
@@ -3270,17 +3529,16 @@
             };
             window.matrixColor = matrixColors[themes[currentThemeIndex]];
         }
+        
+        // Set default theme
         document.getElementById('themeToggle').addEventListener('click', cycleTheme);
-        document.body.classList.add('theme-amber');
-        document.getElementById('themeToggle').title = 'Current: Amber - Click to cycle';
+        document.body.classList.add(themes[currentThemeIndex]); // Add default theme
+        document.getElementById('themeToggle').title = 'Current: Ice Blue - Click to cycle';
         updateMatrixColor();
 
         
         /* --- NEW CHAT CLIENT-SIDE JAVASCRIPT (using native WebSocket) --- */
         
-        // Connect to the WebSocket server
-        // Use wss:// (secure) because your server is on Render, which handles SSL.
-        // This is the *exact* URL from your socket.io implementation, but with wss:// protocol.
         const socketURL = 'wss://wssserver.onrender.com';
         let socket;
 
@@ -3297,6 +3555,12 @@
 
         // Function to connect to WebSocket
         function connectWebSocket() {
+            // Only connect if chat is enabled
+            if (!siteConfig.chatEnabled) {
+                console.log("Chat is disabled. WebSocket will not connect.");
+                return;
+            }
+            
             try {
                 socket = new WebSocket(socketURL);
 
@@ -3305,7 +3569,6 @@
                     console.log('WebSocket connection established.');
                     addMessage({ message: `> Connected to chat server. Welcome!` }, 'system');
                     
-                    // If we already have a username (e.g., from a reconnect), send it
                     if (window.username) {
                         sendSocketMessage('newUser', { username: window.username });
                     }
@@ -3316,7 +3579,6 @@
                     try {
                         const data = JSON.parse(event.data);
                         
-                        // Handle different message types from server
                         switch (data.type) {
                             case 'message':
                                 addMessage(data.payload, 'other');
@@ -3337,7 +3599,6 @@
                 socket.onclose = (event) => {
                     console.log('WebSocket connection closed.', event.reason);
                     addMessage({ message: `> Disconnected from chat. Reconnecting...` }, 'system');
-                    // Simple reconnect logic: try again after 2 seconds
                     setTimeout(connectWebSocket, 2000);
                 };
 
@@ -3372,7 +3633,6 @@
             const name = usernameInput.value.trim();
             if (name) {
                 window.username = name;
-                // Send the username to the server
                 sendSocketMessage('newUser', { username: name });
                 
                 usernameModal.style.display = 'none'; // Hide modal
@@ -3386,18 +3646,12 @@
             e.preventDefault();
             const msg = chatInput.value.trim();
             if (msg && window.username) {
-                // Send chat message to server
                 sendSocketMessage('chatMessage', { message: msg });
-                
-                // Add our own message to the UI immediately
                 addMessage({ username: window.username, message: msg }, 'mine');
                 chatInput.value = ''; // Clear input
             }
         });
         
-        // Start the initial WebSocket connection
-        connectWebSocket();
-
         /**
          * Adds a message to the chat window
          * @param {object} data - { username, message }
@@ -3421,11 +3675,112 @@
             }
 
             messagesContainer.appendChild(messageElement);
-            
-            // Scroll to bottom
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
+        
+        // --- NEW SITE INITIALIZATION LOGIC ---
+        
+        let countdownInterval; // To store the timer interval
+
+        /**
+         * Formats remaining milliseconds into DD:HH:MM:SS
+         */
+        function formatTimeRemaining(ms) {
+            if (ms <= 0) {
+                return "00:00:00:00";
+            }
+            
+            let seconds = Math.floor(ms / 1000);
+            let minutes = Math.floor(seconds / 60);
+            let hours = Math.floor(minutes / 60);
+            let days = Math.floor(hours / 24);
+
+            seconds = seconds % 60;
+            minutes = minutes % 60;
+            hours = hours % 24;
+
+            const pad = (n) => n.toString().padStart(2, '0');
+
+            return `${pad(days)}:${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+        }
+
+        /**
+         * Runs on page load to set up features based on siteConfig
+         */
+        function initializeSiteFeatures() {
+            
+            // --- 1. Announcement Bar Logic ---
+            if (siteConfig.announcement.enabled && !sessionStorage.getItem('announcementClosed')) {
+                const bar = document.getElementById('announcement-bar');
+                const titleEl = document.getElementById('announcement-title');
+                const bodyEl = document.getElementById('announcement-body');
+                const timerEl = document.getElementById('announcement-timer');
+                const closeBtn = document.getElementById('announcement-close');
+
+                titleEl.textContent = siteConfig.announcement.title;
+                bodyEl.innerHTML = siteConfig.announcement.body; // Use .innerHTML to allow <br> tags
+
+                // Close button logic
+                closeBtn.addEventListener('click', () => {
+                    bar.style.display = 'none';
+                    document.body.classList.remove('announcement-visible');
+                    // Remember for this session only
+                    sessionStorage.setItem('announcementClosed', 'true'); 
+                    if (countdownInterval) {
+                        clearInterval(countdownInterval); // Stop timer when closed
+                    }
+                });
+
+                // Timer logic
+                if (siteConfig.announcement.timer.enabled) {
+                    const targetTime = siteConfig.announcement.timer.targetTimestamp;
+                    
+                    function updateTimer() {
+                        const remaining = targetTime - Date.now();
+                        timerEl.textContent = formatTimeRemaining(remaining);
+                        
+                        if (remaining <= 0) {
+                            timerEl.textContent = "00:00:00:00";
+                            clearInterval(countdownInterval);
+                        }
+                    }
+                    
+                    updateTimer(); // Run once immediately
+                    timerEl.style.display = 'block';
+                    countdownInterval = setInterval(updateTimer, 1000);
+                }
+
+                // Show the bar
+                bar.style.display = 'flex';
+                document.body.classList.add('announcement-visible');
+            }
+            
+            // --- 2. Chat Enable/Disable Logic ---
+            if (!siteConfig.chatEnabled) {
+                document.getElementById('chatTab').style.display = 'none';
+                document.getElementById('chat-section').style.display = 'none';
+            } else {
+                // If chat is enabled, start the connection
+                connectWebSocket();
+            }
+            
+            // --- 3. Games Enable/Disable Logic ---
+            if (!siteConfig.gamesEnabled) {
+                // Hide game sections
+                document.getElementById('lessons-section').style.display = 'none';
+                document.getElementById('all-lessons').style.display = 'none';
+                
+                // Show disabled message *if* user is on the 'lessons' tab
+                if (document.getElementById('lessonsTab').classList.contains('active')) {
+                    document.getElementById('games-disabled-section').style.display = 'block';
+                }
+            }
+        }
+        
+        // Run the initialization function once the DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeSiteFeatures);
+        
     </script>
 </body>
 </html>
