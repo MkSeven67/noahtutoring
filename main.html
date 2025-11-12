@@ -6,8 +6,7 @@
     <title>Canvas | College Courses</title>
     <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Load the Socket.io client library -->
-    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+    <!-- REMOVED Socket.io client library -->
     <style>
         * {
             margin: 0;
@@ -2851,6 +2850,65 @@
                     </div>
             </div>
         </section>
+        <section id="partners-section" class="partners-section">
+            <h2>PARTNERS</h2>
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/1.jpg" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">Bloxcraft UBG</h3>
+                    <p class="partner-desc">Ultimate UBG site with hundreds of lessons right on your fingertips! We got apps like GN-Math, Elite Gamez, and more to come!</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/sqPFYEsz8F', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://bloxcraft-ubg.pages.dev/', '_blank')">VISIT SITE</button>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/2.jpg" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">Glacier Arcade</h3>
+                    <p class="partner-desc">Premium unblocked games with 400+ titles including Buckshot Roulette, Ultrakill, All FNAF games, and Minecraft. Smooth design, instant play.</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/zfBZvZUHmR', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://glacierarcade.xyz/', '_blank')">VISIT SITE</button>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/3.jpg" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">Rosin</h3>
+                    <p class="partner-desc">Rosin, your one-stop for 567+ unblocked games with clean UI, accounts, and BYOD. All this and much more. Made with ❤️ for gamers everywhere.</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/xzwUY9R8Tp', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://afcyqmpzsb.itafricagroup.com/', '_blank')">VISIT SITE</button>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/4.png" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">GN-Math</h3>
+                    <p class="partner-desc">Most popular game/proxy sites use my games!! (doge unblocker, frogies arcade, truffled, petezah and more)</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/gn-math', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://gn-math.dev/', '_blank')">VISIT SITE</button>
+                    </div>
+                </div>
+                <div class="partner-card">
+                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/6.jpg" alt="Partner Logo" class="partner-image">
+                    <h3 class="partner-title">Truffled</h3>
+                    <p class="partner-desc">Join us so we can grow and hopefully be one of the biggest unblocked game sites ❤️</p>
+                    <div class="partner-buttons">
+                        <button class="discord-btn" onclick="window.open('https://discord.gg/truffled', '_blank')">
+                            <i class="fab fa-discord"></i>
+                        </button>
+                        <button class="visit-btn" onclick="window.open('https://truffled.lol/', '_blank')">VISIT SITE</button>
+                    </div>
+            </div>
+        </section>
 
         <!-- Partners Section (Hidden by default) -->
         <section id="partners-section" class="partners-section">
@@ -2990,83 +3048,83 @@
         }
 
         function downloadCurrentGame() {
-    const gameFrame = document.getElementById('gameFrame');
-    const gameUrl = gameFrame.src;
-    const gameTitle = document.getElementById('gameTitle').textContent;
-    
-    console.log('Download attempted for:', gameUrl, 'Title:', gameTitle);
-    
-    if (gameUrl && gameUrl.includes('rawcdn.githack.com') && gameUrl.includes('games/')) {
-        trackEvent('game_interaction', 'download_attempt', gameTitle, 1);
-        initiateDownload(gameUrl, gameTitle);
-    } else {
-        trackEvent('game_interaction', 'download_failed', gameTitle, 1);
-        alert('Sorry, this game is not downloadable. Try another one.');
-    }
-}
+            const gameFrame = document.getElementById('gameFrame');
+            const gameUrl = gameFrame.src;
+            const gameTitle = document.getElementById('gameTitle').textContent;
+            
+            console.log('Download attempted for:', gameUrl, 'Title:', gameTitle);
+            
+            if (gameUrl && gameUrl.includes('rawcdn.githack.com') && gameUrl.includes('games/')) {
+                trackEvent('game_interaction', 'download_attempt', gameTitle, 1);
+                initiateDownload(gameUrl, gameTitle);
+            } else {
+                trackEvent('game_interaction', 'download_failed', gameTitle, 1);
+                alert('Sorry, this game is not downloadable. Try another one.');
+            }
+        }
 
         async function initiateDownload(gameUrl, gameTitle) {
-    try {
-        const gameMatch = gameUrl.match(/games\/(\d+)\.html/);
-        if (!gameMatch) {
-            throw new Error('Could not extract game number from URL');
+            try {
+                const gameMatch = gameUrl.match(/games\/(\d+)\.html/);
+                if (!gameMatch) {
+                    throw new Error('Could not extract game number from URL');
+                }
+                
+                const gameNumber = gameMatch[1];
+                
+                const jsDelivrUrl = `https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/${gameNumber}.html`;
+                
+                console.log('Downloading from:', jsDelivrUrl);
+                
+                const response = await fetch(jsDelivrUrl);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                let gameContent = await response.text();
+                
+                const brandingElement = `
+                <div style="position:fixed;bottom:10px;right:10px;z-index:9999;">
+                    <a href="https://noahs-calculus-tutor.pages.dev" target="_blank" 
+                       style="color:white;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(0,0,0,0.8);padding:8px 12px;border-radius:6px;font-family:Arial,sans-serif;">
+                        <span>Downloaded</span>
+                        <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/5.png" 
+                             style="height:18px;width:auto;">
+                    </a>
+                </div>
+                `;
+                
+                if (gameContent.includes('</body>')) {
+                    gameContent = gameContent.replace('</body>', brandingElement + '</body>');
+                } else {
+                    gameContent += brandingElement;
+                }
+                
+                if (gameContent.includes('<title>')) {
+                    gameContent = gameContent.replace(
+                        /<title>.*?<\/title>/i, 
+                        `<title>${gameTitle}</title>`
+                    );
+                }
+                
+                const fileBlob = new Blob([gameContent], { type: 'text/html' });
+                const fileUrl = URL.createObjectURL(fileBlob);
+                const downloadLink = document.createElement('a');
+                downloadLink.href = fileUrl;
+                downloadLink.download = `${gameTitle.replace(/[^a-z0-9]/gi, '_')}.html`;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                URL.revokeObjectURL(fileUrl);
+                
+                trackEvent('game_interaction', 'download_success', gameTitle, 1);
+                
+            } catch (error) {
+                console.error('Download error:', error);
+                trackEvent('game_interaction', 'download_error', gameTitle, 1);
+                alert('Unable to download game. Please try again later.');
+            }
         }
-        
-        const gameNumber = gameMatch[1];
-        
-        const jsDelivrUrl = `https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor@master/games/${gameNumber}.html`;
-        
-        console.log('Downloading from:', jsDelivrUrl);
-        
-        const response = await fetch(jsDelivrUrl);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        
-        let gameContent = await response.text();
-        
-        const brandingElement = `
-        <div style="position:fixed;bottom:10px;right:10px;z-index:9999;">
-            <a href="https://noahs-calculus-tutor.pages.dev" target="_blank" 
-               style="color:white;text-decoration:none;display:flex;align-items:center;gap:8px;font-size:12px;background:rgba(0,0,0,0.8);padding:8px 12px;border-radius:6px;font-family:Arial,sans-serif;">
-                <span>Downloaded</span>
-                <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/reimagined-octo-winner@main/pictures/5.png" 
-                     style="height:18px;width:auto;">
-            </a>
-        </div>
-        `;
-        
-        if (gameContent.includes('</body>')) {
-            gameContent = gameContent.replace('</body>', brandingElement + '</body>');
-        } else {
-            gameContent += brandingElement;
-        }
-        
-        if (gameContent.includes('<title>')) {
-            gameContent = gameContent.replace(
-                /<title>.*?<\/title>/i, 
-                `<title>${gameTitle}</title>`
-            );
-        }
-        
-        const fileBlob = new Blob([gameContent], { type: 'text/html' });
-        const fileUrl = URL.createObjectURL(fileBlob);
-        const downloadLink = document.createElement('a');
-        downloadLink.href = fileUrl;
-        downloadLink.download = `${gameTitle.replace(/[^a-z0-9]/gi, '_')}.html`;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-        URL.revokeObjectURL(fileUrl);
-        
-        trackEvent('game_interaction', 'download_success', gameTitle, 1);
-        
-    } catch (error) {
-        console.error('Download error:', error);
-        trackEvent('game_interaction', 'download_error', gameTitle, 1);
-        alert('Unable to download game. Please try again later.');
-    }
-}
 
         function toggleFullscreen() {
             const gameFrame = document.getElementById('gameFrame');
@@ -3218,13 +3276,14 @@
         updateMatrixColor();
 
         
-        /* --- NEW CHAT CLIENT-SIDE JAVASCRIPT --- */
-
-        // NOTE: Replace 'YOUR_EC2_PUBLIC_IP' with your actual AWS EC2 Public IP
-        // We use 'ws://' (WebSocket) not 'wss://' (Secure WebSocket) for this guide.
-        // Getting 'wss://' is a more advanced setup.
-        const socket = io('https://wssserver.onrender.com:3000');
+        /* --- NEW CHAT CLIENT-SIDE JAVASCRIPT (using native WebSocket) --- */
         
+        // Connect to the WebSocket server
+        // Use wss:// (secure) because your server is on Render, which handles SSL.
+        // This is the *exact* URL from your socket.io implementation, but with wss:// protocol.
+        const socketURL = 'wss://wssserver.onrender.com';
+        let socket;
+
         window.username = null; // Store username globally
 
         const usernameModal = document.getElementById('username-modal');
@@ -3236,13 +3295,86 @@
         const chatInput = document.getElementById('chat-input');
         const messagesContainer = document.getElementById('messages');
 
+        // Function to connect to WebSocket
+        function connectWebSocket() {
+            try {
+                socket = new WebSocket(socketURL);
+
+                // Handle connection opening
+                socket.onopen = (event) => {
+                    console.log('WebSocket connection established.');
+                    addMessage({ message: `> Connected to chat server. Welcome!` }, 'system');
+                    
+                    // If we already have a username (e.g., from a reconnect), send it
+                    if (window.username) {
+                        sendSocketMessage('newUser', { username: window.username });
+                    }
+                };
+
+                // Handle incoming messages
+                socket.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        
+                        // Handle different message types from server
+                        switch (data.type) {
+                            case 'message':
+                                addMessage(data.payload, 'other');
+                                break;
+                            case 'userConnected':
+                                addMessage({ message: `> ${data.payload.username} has joined the chat` }, 'system');
+                                break;
+                            case 'userDisconnected':
+                                addMessage({ message: `> ${data.payload.username} has left the chat` }, 'system');
+                                break;
+                        }
+                    } catch (error) {
+                        console.error('Error parsing message from server:', event.data);
+                    }
+                };
+
+                // Handle connection closing
+                socket.onclose = (event) => {
+                    console.log('WebSocket connection closed.', event.reason);
+                    addMessage({ message: `> Disconnected from chat. Reconnecting...` }, 'system');
+                    // Simple reconnect logic: try again after 2 seconds
+                    setTimeout(connectWebSocket, 2000);
+                };
+
+                // Handle connection errors
+                socket.onerror = (error) => {
+                    console.error('WebSocket error:', error);
+                    addMessage({ message: `> Connection error. Please check the console.` }, 'system');
+                };
+
+            } catch (error) {
+                console.error("Failed to create WebSocket:", error);
+                addMessage({ message: `> Failed to connect. Is the URL right?` }, 'system');
+            }
+        }
+        
+        // Helper function to send standardized JSON messages
+        function sendSocketMessage(type, payload) {
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                const message = JSON.stringify({
+                    type: type,
+                    payload: payload
+                });
+                socket.send(message);
+            } else {
+                console.warn('Socket not open. Message not sent:', type, payload);
+            }
+        }
+
         // Handle username submission
         usernameForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const name = usernameInput.value.trim();
             if (name) {
                 window.username = name;
-                socket.emit('newUser', name); // Tell server our name
+                // Send the username to the server
+                sendSocketMessage('newUser', { username: name });
+                
                 usernameModal.style.display = 'none'; // Hide modal
                 chatContainer.style.display = 'flex'; // Show chat
                 chatInput.focus();
@@ -3254,38 +3386,17 @@
             e.preventDefault();
             const msg = chatInput.value.trim();
             if (msg && window.username) {
-                socket.emit('chatMessage', msg);
-                addMessage({ username: window.username, message: msg }, 'mine'); // Add our own message
+                // Send chat message to server
+                sendSocketMessage('chatMessage', { message: msg });
+                
+                // Add our own message to the UI immediately
+                addMessage({ username: window.username, message: msg }, 'mine');
                 chatInput.value = ''; // Clear input
             }
         });
-
-        // Listen for messages from the server
-        socket.on('message', (data) => {
-            addMessage(data, 'other');
-        });
-
-        // Listen for user connection notifications
-        socket.on('userConnected', (username) => {
-            addMessage({ message: `> ${username} has joined the chat` }, 'system');
-        });
-
-        // Listen for user disconnection notifications
-        socket.on('userDisconnected', (username) => {
-            if(username) { // Only show if user had a name
-                 addMessage({ message: `> ${username} has left the chat` }, 'system');
-            }
-        });
         
-        // Listen for server connection success
-        socket.on('connect', () => {
-             addMessage({ message: `> Connected to chat server. Welcome!` }, 'system');
-        });
-        
-        // Listen for server connection errors
-        socket.on('connect_error', (err) => {
-             addMessage({ message: `> Connection failed. Is the server running? ${err.message}` }, 'system');
-        });
+        // Start the initial WebSocket connection
+        connectWebSocket();
 
         /**
          * Adds a message to the chat window
