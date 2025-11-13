@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
     <title>Canvas | College Courses</title>
     <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -953,6 +953,19 @@
             color: var(--gray-text);
             margin: 0;
         }
+        
+        /* --- NEW: Style for a flagged (censored) message --- */
+        .chat-message.mine.flagged {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: #ff0000;
+            color: #ff8888;
+        }
+        
+        .chat-message.mine.flagged strong {
+            color: #ff8888;
+        }
+        /* --- End new style --- */
+
 
         #chat-form {
             display: flex;
@@ -1428,7 +1441,7 @@
         <section id="lessons-section">
             <h2>POPULAR</h2>
             <div class="lessons-grid">
-                <!-- Popular lesson cards... -->
+                <!-- Popular lesson cards... (truncated for brevity) -->
                 <div class="lesson-card" onclick="openLesson('Plants Vs Zombies 2', 'https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html')">
                     <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg" alt="Plants Vs Zombies 2" class="lesson-image">
                     <h3 class="lesson-title">Plants Vs Zombies 2</h3>
@@ -1450,33 +1463,7 @@
             </div>
         </section>
 
-        <!-- All Lessons Section (Visible by default) -->
-         <section id="lessons-section">
-            <h2>POPULAR</h2>
-            <div class="lessons-grid">
-                <!-- Popular lesson cards... -->
-                <div class="lesson-card" onclick="openLesson('Plants Vs Zombies 2', 'https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/92.html')">
-                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg" alt="Plants Vs Zombies 2" class="lesson-image">
-                    <h3 class="lesson-title">Plants Vs Zombies 2</h3>
-                    <p class="lesson-desc">Defend your lawn with crazy plants against fun-loving zombies across time</p>
-                    <span class="launch-command">[LAUNCH: PVZ_2]</span>
-                </div>
-                <div class="lesson-card" onclick="openLesson('Hotline Miami', 'https://rawcdn.githack.com/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/master/games/16.html')">
-                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/22.jpg" alt="Hotline Miami" class="lesson-image">
-                    <h3 class="lesson-title">Hotline Miami</h3>
-                    <p class="lesson-desc">Fast-paced top-down action combat</p>
-                    <span class="launch-command">[LAUNCH: HOTLINE_MIAMI]</span>
-                </div>
-                <div class="lesson-card" onclick="openLesson('Balatro', 'https://thirstygithub.github.io/cool-math/')">
-                    <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/195.jpg" alt="Balatro" class="lesson-image">
-                    <h3 class="lesson-title">Balatro</h3>
-                    <p class="lesson-desc">Build insane poker hands with special Joker cards</p>
-                    <span class="launch-command">[LAUNCH: BALATRO]</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- All Lessons Section (Visible by default) -->
+         <!-- All Lessons Section (Visible by default) -->
          <section id="all-lessons">
             <h2>ALL LESSONS</h2>
             <div class="search-container">
@@ -3164,6 +3151,12 @@
             </div>
         </section>
         
+        <!-- NEW Games Disabled Section -->
+        <section id="games-disabled-section">
+            <h2>GAMES</h2>
+            <p class="disabled-message-static">Games are currently disabled by the administrator.</p>
+        </section>
+        
         <!-- NEW CHAT SECTION (Hidden by default) -->
         <section id="chat-section" class="chat-section">
             <h2>HUB CHAT</h2>
@@ -3533,6 +3526,8 @@
         
         const socketURL = 'wss://backup-katyisd.zone.id';
         let socket;
+        // --- NEW: Client-side ping interval ---
+        let pingInterval;
 
         window.username = null; // Store username globally
 
@@ -3564,6 +3559,15 @@
                     if (window.username) {
                         sendSocketMessage('newUser', { username: window.username });
                     }
+                    
+                    // --- NEW: Start client-side ping interval ---
+                    // This is in addition to the server-side one, as requested.
+                    if (pingInterval) clearInterval(pingInterval); // Clear old one
+                    pingInterval = setInterval(() => {
+                        // console.log('Client sending ping');
+                        sendSocketMessage('ping', {}); // Send a ping message
+                    }, 25000); // Send ping every 25 seconds
+                    // --- End new ping ---
                 };
 
                 // Handle incoming messages
@@ -3571,6 +3575,7 @@
                     try {
                         const data = JSON.parse(event.data);
                         
+                        // --- UPDATED: Handle new message types ---
                         switch (data.type) {
                             case 'message':
                                 addMessage(data.payload, 'other');
@@ -3580,6 +3585,23 @@
                                 break;
                             case 'userDisconnected':
                                 addMessage({ message: `> ${data.payload.username} has left the chat` }, 'system');
+                                break;
+                            
+                            // --- NEW: Handle flagged message from server ---
+                            case 'messageFlagged':
+                                // Add a censored version of the message
+                                addMessage(
+                                    { username: window.username, message: '########' }, 
+                                    'mine', 
+                                    true // Add 'flagged' class
+                                );
+                                // Add the system reason
+                                addMessage({ message: `> ${data.payload.reason}` }, 'system');
+                                break;
+                                
+                            // --- NEW: Handle generic system message ---
+                            case 'system':
+                                addMessage(data.payload, 'system');
                                 break;
                         }
                     } catch (error) {
@@ -3591,6 +3613,8 @@
                 socket.onclose = (event) => {
                     console.log('WebSocket connection closed.', event.reason);
                     addMessage({ message: `> Disconnected from chat. Reconnecting...` }, 'system');
+                    // --- NEW: Stop client ping on disconnect ---
+                    if (pingInterval) clearInterval(pingInterval);
                     setTimeout(connectWebSocket, 2000);
                 };
 
@@ -3639,6 +3663,7 @@
             const msg = chatInput.value.trim();
             if (msg && window.username) {
                 sendSocketMessage('chatMessage', { message: msg });
+                // Add message to own window *optimistically*
                 addMessage({ username: window.username, message: msg }, 'mine');
                 chatInput.value = ''; // Clear input
             }
@@ -3648,10 +3673,16 @@
          * Adds a message to the chat window
          * @param {object} data - { username, message }
          * @param {string} type - 'mine', 'other', or 'system'
+         * @param {boolean} [isFlagged=false] - Optional: True to add 'flagged' class
          */
-        function addMessage(data, type) {
+        function addMessage(data, type, isFlagged = false) {
             const messageElement = document.createElement('div');
             messageElement.classList.add('chat-message', type);
+            
+            // --- NEW: Add 'flagged' class if specified ---
+            if (isFlagged) {
+                messageElement.classList.add('flagged');
+            }
 
             if (type === 'system') {
                 messageElement.textContent = data.message;
@@ -3660,6 +3691,7 @@
                 usernameElement.textContent = data.username;
                 
                 const textElement = document.createElement('span');
+                // Sanitize text content to prevent XSS
                 textElement.textContent = data.message;
 
                 messageElement.appendChild(usernameElement);
