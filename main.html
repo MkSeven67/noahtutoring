@@ -658,7 +658,7 @@
             box-shadow: 0 0 20px var(--primary-orange);
         }
 
-        .partners-section, .chat-section { /* Added chat-section */
+        .partners-section, .chat-section, .proxy-section { /* Added proxy-section */
             display: none;
         }
         
@@ -1004,6 +1004,111 @@
         
         /* --- END NEW CHAT STYLES --- */
 
+        /* --- NEW PROXY STYLES --- */
+        .proxy-section {
+            /* display: none; is already handled */
+        }
+
+        #proxy-container {
+            position: relative;
+            width: 100%;
+            height: 70vh; /* 70% of viewport height */
+            min-height: 500px;
+            background: #000;
+            border: 1px solid var(--primary-orange);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        #proxyFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: blur(15px);
+            transition: filter 0.5s ease;
+        }
+
+        #proxyFrame.unlocked {
+            filter: blur(0);
+        }
+
+        #proxy-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px); /* Double blur effect */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        #proxy-overlay.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .proxy-password-box {
+            text-align: center;
+            padding: 30px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            border: 2px solid var(--primary-orange);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        .proxy-password-box h3 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        #proxyPasswordInput {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(10, 10, 10, .8);
+            border: 2px solid var(--primary-orange);
+            border-radius: 5px;
+            color: var(--light-text);
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        #proxyPasswordSubmit {
+            background: var(--primary-orange);
+            color: #000000;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            width: 100%;
+        }
+
+        #proxyPasswordSubmit:hover {
+            background: var(--accent-orange);
+        }
+
+        #proxy-controls {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            z-index: 5;
+            /* display: none; is handled inline */
+            gap: 10px;
+        }
+        
+        /* --- END NEW PROXY STYLES --- */
+
+
         .theme-rainbow {
             --primary-orange: #ff0080;
             --primary-orange-rgb: 255, 0, 128;
@@ -1038,7 +1143,10 @@
         .theme-rainbow #chat-form, /* Added */
         .theme-rainbow #chat-submit, /* Added */
         .theme-rainbow #announcement-bar, /* Added */
-        .theme-rainbow #announcement-timer /* Added */
+        .theme-rainbow #announcement-timer, /* Added */
+        .theme-rainbow #proxy-container, /* Added */
+        .theme-rainbow .proxy-password-box, /* Added */
+        .theme-rainbow #proxyPasswordInput /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1054,7 +1162,9 @@
         .theme-rainbow .nav-tab.active,
         .theme-rainbow #username-input:focus, /* Added */
         .theme-rainbow #username-submit:hover, /* Added */
-        .theme-rainbow #chat-submit:hover /* Added */
+        .theme-rainbow #chat-submit:hover, /* Added */
+        .theme-rainbow #proxyPasswordInput:focus, /* Added */
+        .theme-rainbow #proxyPasswordSubmit:hover /* Added */
         {
             box-shadow: 0 0 15px var(--primary-orange) !important;
             border-color: var(--accent-orange) !important;
@@ -1094,7 +1204,10 @@
         .theme-cyber-green #chat-form, /* Added */
         .theme-cyber-green #chat-submit, /* Added */
         .theme-cyber-green #announcement-bar, /* Added */
-        .theme-cyber-green #announcement-timer /* Added */
+        .theme-cyber-green #announcement-timer, /* Added */
+        .theme-cyber-green #proxy-container, /* Added */
+        .theme-cyber-green .proxy-password-box, /* Added */
+        .theme-cyber-green #proxyPasswordInput /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1110,7 +1223,9 @@
         .theme-cyber-green .nav-tab.active,
         .theme-cyber-green #username-input:focus, /* Added */
         .theme-cyber-green #username-submit:hover, /* Added */
-        .theme-cyber-green #chat-submit:hover /* Added */
+        .theme-cyber-green #chat-submit:hover, /* Added */
+        .theme-cyber-green #proxyPasswordInput:focus, /* Added */
+        .theme-cyber-green #proxyPasswordSubmit:hover /* Added */
         {
             box-shadow: 0 0 15px var(--primary-orange) !important;
             border-color: var(--accent-orange) !important;
@@ -1150,7 +1265,10 @@
         .theme-ice-blue #chat-form, /* Added */
         .theme-ice-blue #chat-submit, /* Added */
         .theme-ice-blue #announcement-bar, /* Added */
-        .theme-ice-blue #announcement-timer /* Added */
+        .theme-ice-blue #announcement-timer, /* Added */
+        .theme-ice-blue #proxy-container, /* Added */
+        .theme-ice-blue .proxy-password-box, /* Added */
+        .theme-ice-blue #proxyPasswordInput /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1166,7 +1284,9 @@
         .theme-ice-blue .nav-tab.active,
         .theme-ice-blue #username-input:focus, /* Added */
         .theme-ice-blue #username-submit:hover, /* Added */
-        .theme-ice-blue #chat-submit:hover /* Added */
+        .theme-ice-blue #chat-submit:hover, /* Added */
+        .theme-ice-blue #proxyPasswordInput:focus, /* Added */
+        .theme-ice-blue #proxyPasswordSubmit:hover /* Added */
         {
             box-shadow: 0 0 15px var(--primary-orange) !important;
             border-color: var(--accent-orange) !important;
@@ -1206,7 +1326,10 @@
         .theme-solarized #chat-form, /* Added */
         .theme-solarized #chat-submit, /* Added */
         .theme-solarized #announcement-bar, /* Added */
-        .theme-solarized #announcement-timer /* Added */
+        .theme-solarized #announcement-timer, /* Added */
+        .theme-solarized #proxy-container, /* Added */
+        .theme-solarized .proxy-password-box, /* Added */
+        .theme-solarized #proxyPasswordInput /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1222,7 +1345,9 @@
         .theme-solarized .nav-tab.active,
         .theme-solarized #username-input:focus, /* Added */
         .theme-solarized #username-submit:hover, /* Added */
-        .theme-solarized #chat-submit:hover /* Added */
+        .theme-solarized #chat-submit:hover, /* Added */
+        .theme-solarized #proxyPasswordInput:focus, /* Added */
+        .theme-solarized #proxyPasswordSubmit:hover /* Added */
         {
             box-shadow: 0 0 15px var(--primary-orange) !important;
             border-color: var(--accent-orange) !important;
@@ -1262,7 +1387,10 @@
         .theme-purple-haze #chat-form, /* Added */
         .theme-purple-haze #chat-submit, /* Added */
         .theme-purple-haze #announcement-bar, /* Added */
-        .theme-purple-haze #announcement-timer /* Added */
+        .theme-purple-haze #announcement-timer, /* Added */
+        .theme-purple-haze #proxy-container, /* Added */
+        .theme-purple-haze .proxy-password-box, /* Added */
+        .theme-purple-haze #proxyPasswordInput /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1278,7 +1406,9 @@
         .theme-purple-haze .nav-tab.active,
         .theme-purple-haze #username-input:focus, /* Added */
         .theme-purple-haze #username-submit:hover, /* Added */
-        .theme-purple-haze #chat-submit:hover /* Added */
+        .theme-purple-haze #chat-submit:hover, /* Added */
+        .theme-purple-haze #proxyPasswordInput:focus, /* Added */
+        .theme-purple-haze #proxyPasswordSubmit:hover /* Added */
         {
             box-shadow: 0 0 15px var(--primary-orange) !important;
             border-color: var(--accent-orange) !important;
@@ -1309,7 +1439,10 @@
         .theme-amber #chat-form,
         .theme-amber #chat-submit,
         .theme-amber #announcement-bar,
-        .theme-amber #announcement-timer
+        .theme-amber #announcement-timer,
+        .theme-amber #proxy-container, /* Added */
+        .theme-amber .proxy-password-box, /* Added */
+        .theme-amber #proxyPasswordInput /* Added */
         {
             border-color: var(--primary-orange) !important;
         }
@@ -1325,7 +1458,9 @@
         .theme-amber .nav-tab.active,
         .theme-amber #username-input:focus,
         .theme-amber #username-submit:hover,
-        .theme-amber #chat-submit:hover
+        .theme-amber #chat-submit:hover,
+        .theme-amber #proxyPasswordInput:focus, /* Added */
+        .theme-amber #proxyPasswordSubmit:hover /* Added */
         {
             box-shadow: 0 0 15px var(--primary-orange) !important;
             border-color: var(--accent-orange) !important;
@@ -1435,13 +1570,15 @@
             <div class="nav-tab" id="partnersTab" onclick="switchTab('partners')">PARTNERS</div>
             <!-- NEW CHAT TAB -->
             <div class="nav-tab" id="chatTab" onclick="switchTab('chat')">CHAT</div>
+            <!-- NEW PROXY TAB -->
+            <div class="nav-tab" id="proxyTab" onclick="switchTab('proxy')">PR0XY</div>
         </div>
 
         <!-- Lessons Section (Visible by default) -->
         <section id="lessons-section">
             <h2>POPULAR</h2>
             <div class="lessons-grid">
-                <!-- Popular lesson cards... (truncated for brevity) -->
+                <!-- Popular lesson cards removed as requested -->
                 <div class="lesson-card" onclick="openLesson('Plants Vs Zombies 2', 'https://backup-katyisd.zone.id/prxy/Gzh0821/pvzge_web/master/docs/index.html')">
                     <img src="https://cdn.jsdelivr.net/gh/NoahsAmazingTutoringHelp/Noahs-Calculus-Tutor/images/197.jpg" alt="Plants Vs Zombies 2" class="lesson-image">
                     <h3 class="lesson-title">Plants Vs Zombies 2</h3>
@@ -3174,6 +3311,31 @@
             </div>
         </section>
 
+        <!-- NEW PROXY SECTION -->
+        <section id="proxy-section" class="proxy-section">
+            <h2>PR0XY</h2>
+            <div id="proxy-container">
+                <iframe id="proxyFrame" class="proxy-iframe" src="about:blank"></iframe>
+                <div id="proxy-overlay">
+                    <div class="proxy-password-box">
+                        <h3>ENTER PASSWORD</h3>
+                        <input type="password" id="proxyPasswordInput" placeholder="> PASSWORD...">
+                        <button id="proxyPasswordSubmit">UNLOCK</button>
+                        <p id="proxyErrorMessage" style="color: red; display: none; margin-top: 10px;">Incorrect Password</p>
+                    </div>
+                </div>
+                <div id="proxy-controls" style="display: none;">
+                    <button class="btn" id="proxyFullscreenBtn">
+                        <i class="fas fa-expand"></i> Fullscreen
+                    </button>
+                    <button class="btn" id="proxyOpenBtn">
+                        <i class="fas fa-external-link-alt"></i> Open
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
         <footer>
             <p>© 2025 Katy's Gaming Hub. All rights reserved.</p>
             <p>Educational purposes only.</p>
@@ -3472,6 +3634,7 @@
             document.getElementById('lessonsTab').classList.toggle('active', tabName === 'lessons');
             document.getElementById('partnersTab').classList.toggle('active', tabName === 'partners');
             document.getElementById('chatTab').classList.toggle('active', tabName === 'chat');
+            document.getElementById('proxyTab').classList.toggle('active', tabName === 'proxy'); // NEW
 
             // Show/hide based on config
             document.getElementById('lessons-section').style.display = tabName === 'lessons' && siteConfig.gamesEnabled ? 'block' : 'none';
@@ -3483,6 +3646,9 @@
             // Show/hide chat section (config is checked in initializeSiteFeatures)
             const chatSection = document.getElementById('chat-section');
             chatSection.style.display = tabName === 'chat' ? 'block' : 'none';
+            
+            // NEW: Show/hide proxy section
+            document.getElementById('proxy-section').style.display = tabName === 'proxy' ? 'block' : 'none';
             
             // If user clicks chat tab and hasn't entered a name, show the modal
             if(tabName === 'chat' && !window.username && siteConfig.chatEnabled) {
@@ -3805,6 +3971,73 @@
         // Run the initialization function once the DOM is loaded
         document.addEventListener('DOMContentLoaded', initializeSiteFeatures);
         
+        /* --- NEW PROXY LOGIC --- */
+        
+        // Get proxy elements
+        const proxyPasswordInput = document.getElementById('proxyPasswordInput');
+        const proxyPasswordSubmit = document.getElementById('proxyPasswordSubmit');
+        const proxyOverlay = document.getElementById('proxy-overlay');
+        const proxyFrame = document.getElementById('proxyFrame');
+        const proxyControls = document.getElementById('proxy-controls');
+        const proxyFullscreenBtn = document.getElementById('proxyFullscreenBtn');
+        const proxyOpenBtn = document.getElementById('proxyOpenBtn');
+        const proxyErrorMessage = document.getElementById('proxyErrorMessage');
+
+        const correctPassword = "8765";
+        const proxyUrl = "https://securly.com.khsonthespot.com/";
+
+        // Handle password submission
+        proxyPasswordSubmit.addEventListener('click', unlockProxy);
+        proxyPasswordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevent form submission
+                unlockProxy();
+            }
+        });
+
+        function unlockProxy() {
+            if (proxyPasswordInput.value === correctPassword) {
+                // Success
+                proxyOverlay.classList.add('hidden');
+                proxyFrame.classList.add('unlocked');
+                proxyFrame.src = proxyUrl;
+                proxyControls.style.display = 'flex';
+                proxyErrorMessage.style.display = 'none';
+            } else {
+                // Failure
+                proxyErrorMessage.style.display = 'block';
+                proxyPasswordInput.value = ''; // Clear input
+            }
+        }
+
+        // Handle Fullscreen button
+        proxyFullscreenBtn.addEventListener('click', () => {
+            if (proxyFrame.requestFullscreen) {
+                proxyFrame.requestFullscreen();
+            } else if (proxyFrame.webkitRequestFullscreen) { /* Safari */
+                proxyFrame.webkitRequestFullscreen();
+            } else if (proxyFrame.msRequestFullscreen) { /* IE11 */
+                proxyFrame.msRequestFullscreen();
+            }
+        });
+
+        // Handle Open button
+        proxyOpenBtn.addEventListener('click', () => {
+            const url = proxyFrame.src;
+            if (url && url !== 'about:blank') {
+                var newWindow = window.open('about:blank', '_blank');
+                if (newWindow) {
+                    newWindow.document.write('<iframe src="' + url + '" frameborder="0" style="border:0; width:100%; height:100%;" allowfullscreen></iframe>');
+                    newWindow.document.title = "Pr0xy"; // Optional: set a title
+                    newWindow.document.close();
+                } else {
+                    console.error("Could not open new window. Pop-up blocker?");
+                }
+            }
+        });
+
+        /* --- END NEW PROXY LOGIC --- */
+
     </script>
 </body>
 </html>
